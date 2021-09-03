@@ -16,8 +16,8 @@ if (isNull _heli) exitWith {
   _return
 };
 
-// Minimum aim value required for gunners to shoot.
-private _maxDistance = 15;
+// Maximum distance from the target the gun can be pointing.
+private _maxOffsetDistance = 15;
 
 // The entity using the left gun.
 private _leftGunner = _heli turretUnit [1];
@@ -162,7 +162,7 @@ waitUntil {
 
     private _leftVectorDistance = getPos _leftTarget vectorDistance _leftVectorEnd;
 
-    if (_leftVectorDistance <= _maxDistance ) then {
+    if (_leftVectorDistance <= _maxOffsetDistance) then {
       _leftGunner forceWeaponFire ["vtx_wpn_m134", "far"];
     };
   };
@@ -191,7 +191,7 @@ waitUntil {
 
     private _rightVectorDistance = getPos _rightTarget vectorDistance _rightVectorEnd;
 
-    if (_rightVectorDistance <= _maxDistance ) then {
+    if (_rightVectorDistance <= _maxOffsetDistance) then {
       _rightGunner forceWeaponFire ["vtx_wpn_m134_2nd", "far"];
     };
   };
