@@ -3,33 +3,38 @@
  *	Turns lights on or off. For control pannel lights with adjustable brightness, that can be set as well.
  *
  *	Arguments:
- *  0: _heli             <OBJECT> - heli to affect.                             Defualt: objNull.
- *  1: _collisionLights  <BOOL>   - Turn on collision lights.                   Default: true.
- *  2: _positionLights   <BOOL>   - Turn on position lights.                    Default: true.
- *  3: _cockpitLight     <BOOL>   - Turn on cockpit light.                      Default: false.
- *  4: _landingLight     <BOOL>   - Turn on landing light.                      Default: false.
- *  5: _upperConsole     <NUMBER> - Upper console brightness, from 0 to 10.     Default: 2.
- *  6: _lowerConsole     <NUMBER> - Lower console brightness, from 0 to 10.     Default: 2.
- *  7: _instrumentPannel <NUMBER> - Instrument pannel brightness, from 0 to 10. Default: 2.
+ *  0: _heli             <OBJECT> - Heli to affect.                             Defualt: objNull.
+ *  1: _debug            <BOOL>   - Enable debug messages and logs              Default: false.
+ *  2: _collisionLights  <BOOL>   - Turn on collision lights.                   Default: true.
+ *  3: _positionLights   <BOOL>   - Turn on position lights.                    Default: true.
+ *  4: _cockpitLight     <BOOL>   - Turn on cockpit light.                      Default: false.
+ *  5: _landingLight     <BOOL>   - Turn on landing light.                      Default: false.
+ *  6: _upperConsole     <NUMBER> - Upper console brightness, from 0 to 10.     Default: 2.
+ *  7: _lowerConsole     <NUMBER> - Lower console brightness, from 0 to 10.     Default: 2.
+ *  8: _instrumentPannel <NUMBER> - Instrument pannel brightness, from 0 to 10. Default: 2.
  *
  *	Return Value:
- *	None.
+ *	0. <BOOL> - True if script ran.
  *
  */
 
 params [
-  ["_heli", objNull], ["_collisionLights", true], ["_positionLights", true],
+  ["_heli", objNull], ["_debug", false], ["_collisionLights", true], ["_positionLights", true],
   ["_cockpitLight", false], ["_landingLight", false],
   ["_upperConsole", 2], ["_lowerConsole", 2], ["_instrumentPannel", 2]
 ];
 
 if (isNull _heli) exitWith {
   [
-    format ["[%1] PDT_H60_Startup_fnc_getTargets: '_heli' not defined.", diag_tickTime]
+    format ["[%1] PDT_H60_Startup_fnc_manageLights: '_heli' not defined.", diag_tickTime],
+    _debug
   ] call PDT_H60_Startup_fnc_debug;
 };
 
-_heli setPilotLight true;
+(driver _heli) disableAI "Lights";
+//_heli setPilotLight true;
+(driver _heli) action ["lightOn", _heli];
+
 
 // Collision lights
 if (_collisionLights) then {
@@ -103,6 +108,7 @@ if (_instrumentPannel > 0) then {
   ];
 };
 
-_heli animateSource ["LandingLight_Show", 0];
-_heli animateSource ["CockpitLight_Show", 0];
-_heli animateSource ["PositionLight_Show", 0];
+[(driver _heli)] spawn PDT_H60_Startup_fnc_monitorBehavior;
+
+_return = true;
+_return

@@ -3,13 +3,14 @@
  *	Forces the AI to shoot door guns.
  *
  *	Arguments:
- *  0: _heli <OBJECT> - heli to affect. Defualt: objNull.
+ *  0: _heli  <OBJECT> - Heli to affect.              Defualt: objNull.
+ *  1: _debug <BOOL>   - Enable debug hints and logs. Default: false.
  *
  *	Return Value:
  *	None
  *
  */
-params [["_heli", objNull]];
+params [["_heli", objNull], ["_debug", false]];
 private _return = false;
 if (isNull _heli) exitWith {
   [
@@ -62,12 +63,10 @@ waitUntil {
     };
   };
 
-  /* Check to make sure the gunners don't shoot when they shouldn't. Comment out for testing.
   // The group is careless, skip.
   if (combatMode (group _leftGunner) isEqualTo "CARELESS") then {
     false
   };
-  */
 
   // The left gunner and the right gunner have no targets, wait until they do.
   if (_leftTargets isEqualTo [] && _rightTargets isEqualTo []) then {
