@@ -13,9 +13,7 @@
 params [["_text", ""]];
 
 if (_text isEqualTo "") exitWith {
-  [
-    format ["[%1] PDT_H60_Startup_fnc_debug: No debug text given...", diag_tickTime]
-  ] call PDT_H60_Startup_fnc_debug;
+  [format ["[%1] No debug text given...", diag_tickTime]] call PDT_H60_Startup_fnc_debug;
 };
 
 hint _text;
