@@ -6,15 +6,15 @@
  *  0: _heli <OBJECT> - heli to affect. Defualt: objNull.
  *
  *	Return Value:
- *	None. It updates the "PDT_H60_Gunner_Left_Targets" and "PDT_H60_Gunner_Right_Targets" variables.
+ *	None
  *
  */
 
 params [["_heli", objNull]];
+private _return = false;
 if (isNull _heli) exitWith {
-  [
-    format ["[%1] PDT_H60_Startup_fnc_getTargets: '_heli' not defined.", diag_tickTime]
-  ] call PDT_H60_Startup_fnc_debug;
+  [format ["[%1] '_heli' not defined.", diag_tickTime]] call PDT_H60_Startup_fnc_debug;
+  _return
 };
 
 // The entity using the left gun.
@@ -40,7 +40,7 @@ waitUntil {
     private _leftVerifiedTargets = [];
 
     // List of verified targets for the left gunner.
-    private _rightVerifiedTargets = [];
+    private _rightVerifedTargets = [];
 
     // Only targets if the left gunner is alive.
     if (alive _leftGunner) then {
@@ -62,7 +62,7 @@ waitUntil {
 
     // Update the target lists.
     _heli setVariable ["PDT_H60_Gunner_Left_Targets", _leftVerifiedTargets, true];
-    _heli setVariable ["PDT_H60_Gunner_Right_Targets", _rightVerifiedTargets, true];
+    _heli setVariable ["PDT_H60_Gunner_Right_Targets", _rightVerifedTargets, true];
 
     // Wait 5 seconds before checking again.
     uiSleep 5;
