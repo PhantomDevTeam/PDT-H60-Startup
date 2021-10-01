@@ -1,19 +1,27 @@
 /*
  *	Author: PDT
- *	Flips switches. TODO: Add sounds.
+ *	Flips switches.
  *
  *	Arguments:
- *  0: _heli     <OBJECT> - heli to affect. Defualt: objNull.
+ *  0: _heli  <OBJECT> - Heli to affect.              Defualt: objNull.
+ *  1: _debug <BOOL>   - Enable debug hints and logs. Default: false.
  *
  *	Return Value:
  *	None
  *
  */
 
-params [["_heli", objNull]];
+params [["_heli", objNull], ["_debug", false]];
 private _return = false;
 if (isNull _heli) exitWith {
+<<<<<<< HEAD:PDT_H60_AI_Startup.Stratis/functions/h60_startup/startup/fn_flipSwitches.sqf
   [format ["[%1] '_heli' not defined.", diag_tickTime]] call PDT_H60_Startup_fnc_debug;
+=======
+  [
+    format ["[%1] PDT_H60_Startup_fnc_flipSwitches: '_heli' not defined.", diag_tickTime],
+    _debug
+  ] call PDT_H60_Startup_fnc_debug;
+>>>>>>> bugfix-improvement-documentation:Demo_Mission/PDT_H60_AI_Startup.Stratis/functions/h60_startup/startup/fn_flipSwitches.sqf
   _return
 };
 

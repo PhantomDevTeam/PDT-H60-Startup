@@ -14,14 +14,10 @@
 params [["_heli", objNull], ["_debug", false]];
 private _return = false;
 if (isNull _heli) exitWith {
-<<<<<<< HEAD:PDT_H60_AI_Startup.Stratis/functions/h60_startup/doorguns/fn_enableDoorguns.sqf
- [format ["[%1] '_heli' not defined.", diag_tickTime]] call PDT_H60_Startup_fnc_debug;
-=======
   [
     format ["[%1] PDT_H60_Startup_fnc_enableDoorguns: '_heli' not defined.", diag_tickTime],
     _debug
   ] call PDT_H60_Startup_fnc_debug;
->>>>>>> bugfix-improvement-documentation:Demo_Mission/PDT_H60_AI_Startup.Stratis/functions/h60_startup/doorguns/fn_enableDoorguns.sqf
   _return
 };
 

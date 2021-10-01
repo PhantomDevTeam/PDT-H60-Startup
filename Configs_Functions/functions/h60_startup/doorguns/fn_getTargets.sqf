@@ -7,23 +7,15 @@
  *  1: _debug <BOOL>   - Enable debug hints and logs. Default: false.
  *
  *	Return Value:
-<<<<<<< HEAD:PDT_H60_AI_Startup.Stratis/functions/h60_startup/doorguns/fn_getTargets.sqf
- *	None
- *
- */
-
-params [["_heli", objNull]];
-private _return = false;
-=======
  *  None.
  *
  */
 
 params [["_heli", objNull], ["_debug", false]];
->>>>>>> bugfix-improvement-documentation:Demo_Mission/PDT_H60_AI_Startup.Stratis/functions/h60_startup/doorguns/fn_getTargets.sqf
 if (isNull _heli) exitWith {
-  [format ["[%1] '_heli' not defined.", diag_tickTime]] call PDT_H60_Startup_fnc_debug;
-  _return
+  [
+    format ["[%1] PDT_H60_Startup_fnc_getTargets: '_heli' not defined.", diag_tickTime]
+  ] call PDT_H60_Startup_fnc_debug;
 };
 
 // The entity using the left gun.
@@ -49,7 +41,7 @@ waitUntil {
     private _leftVerifiedTargets = [];
 
     // List of verified targets for the left gunner.
-    private _rightVerifedTargets = [];
+    private _rightVerifiedTargets = [];
 
     // Only targets if the left gunner is alive.
     if (alive _leftGunner) then {
@@ -71,7 +63,7 @@ waitUntil {
 
     // Update the target lists.
     _heli setVariable ["PDT_H60_Gunner_Left_Targets", _leftVerifiedTargets, true];
-    _heli setVariable ["PDT_H60_Gunner_Right_Targets", _rightVerifedTargets, true];
+    _heli setVariable ["PDT_H60_Gunner_Right_Targets", _rightVerifiedTargets, true];
 
     // Wait 5 seconds before checking again.
     uiSleep 5;

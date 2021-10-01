@@ -13,7 +13,9 @@
 params [["_heli", objNull], ["_debug", false]];
 private _return = false;
 if (isNull _heli) exitWith {
-  [format ["[%1] '_heli' not defined.", diag_tickTime]] call PDT_H60_Startup_fnc_debug;
+  [
+    format ["[%1] PDT_H60_Startup_fnc_forceShoot: '_heli' not defined.", diag_tickTime]
+  ] call PDT_H60_Startup_fnc_debug;
   _return
 };
 
