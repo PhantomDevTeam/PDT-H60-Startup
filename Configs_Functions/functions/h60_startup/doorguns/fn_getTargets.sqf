@@ -7,7 +7,7 @@
  *  1: _debug <BOOL>   - Enable debug hints and logs. Default: false.
  *
  *	Return Value:
- *	None. It updates the "PDT_H60_Gunner_Left_Targets" and "PDT_H60_Gunner_Right_Targets" variables.
+ *  None.
  *
  */
 

@@ -89,8 +89,6 @@ waitUntil {
 
     // Wait 5 seconds then check again. This is a simple loop but it shouldn't run all the time.
     sleep 5;
-
-    hint str(_behavior);
     false
   };
 };

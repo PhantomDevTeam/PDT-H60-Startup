@@ -1,6 +1,6 @@
 /*
  *	Author: PDT
- *	Turns lights on or off. For control pannel lights with adjustable brightness, that can be set as well.
+ *	Turns lights on or off. For control panel lights with adjustable brightness, that can be set as well.
  *
  *	Arguments:
  *  0: _heli             <OBJECT> - Heli to affect.                             Defualt: objNull.
@@ -49,6 +49,11 @@ if (_collisionLights) then {
 if (_positionLights) then {
   _heli animateSource ["Switch_lights_position", 1];
   _heli animateSource ["PositionLight_Show", 1];
+
+  // Show/hide the landing light. Don't know why but this is required to make the position lights
+  // show without it turned on.
+  _heli animateSource ["LandingLight_Show", 1];
+  _heli animateSource ["LandingLight_Show", 0];
 } else {
   _heli animateSource ["Switch_lights_position", 0.5];
   _heli animateSource ["PositionLight_Show", 0];
@@ -57,19 +62,21 @@ if (_positionLights) then {
 if (_cockpitLight) then {
   _heli animateSource ["Switch_lights_cockpit", 1];
   _heli animateSource ["CockpitLight_Show", 1];
+
+  // Show/hide the landing light. Don't know why but this is required to make the cockpit light
+  // show without it turned on.
+  _heli animateSource ["LandingLight_Show", 1];
+  _heli animateSource ["LandingLight_Show", 0];
 } else {
   _heli animateSource ["Switch_lights_cockpit", 0.5];
   _heli animateSource ["CockpitLight_Show", 0];
+
 };
 
 if (_landingLight) then {
-  (driver _heli) action ["lightOn", _heli];
   _heli animateSource ["LandingLight_Show", 1];
-  _heli setPilotLight true;
 } else {
-  (driver _heli) action ["lightOff", _heli];
   _heli animateSource ["LandingLight_Show", 0];
-  _heli setPilotLight false;
 };
 
 if (_upperConsole > 0) then {
@@ -109,6 +116,3 @@ if (_instrumentPannel > 0) then {
 };
 
 [(driver _heli)] spawn PDT_H60_Startup_fnc_monitorBehavior;
-
-_return = true;
-_return

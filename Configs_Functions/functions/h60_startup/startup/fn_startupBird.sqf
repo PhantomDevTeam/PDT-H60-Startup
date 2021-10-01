@@ -5,9 +5,9 @@
  *	Arguments:
  *  0: _heli           <OBJECT> - Heli to affect.              Defualt: objNull.
  *  1: _debug          <BOOL>   - Enable debug hints and logs. Default: false.
- *  2: _skipStartup    <BOOL>   - Skip startup?                Default false.
+ *  2: _skipStartup    <BOOL>   - Skip startup?                Default: false.
  *  3: _lightsOn       <BOOL>   - Turn lights on?              Default: true.
- *  4: _enableDoorguns <BOOL>   - Enable doorguns?             Defualt true.
+ *  4: _enableDoorguns <BOOL>   - Enable doorguns?             Defualt: true.
  *
  *	Return Value:
  *	None
@@ -69,7 +69,7 @@ if !(_skipStartup) then {
       _debug
     ] call PDT_H60_Startup_fnc_debug;
 
-    _success = [_heli, false, true, true, true, true] call PDT_H60_Startup_fnc_manageLights;
+    _success = [_heli] call PDT_H60_Startup_fnc_manageLights;
 
     [
       format ["[%1] PDT_H60_Startup_fnc_startupBird: Lights on: %2", diag_tickTime, _success],
